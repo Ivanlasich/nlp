@@ -70,12 +70,6 @@ class Attention(nn.Module):
         attention = self.v(energy)
         attention = torch.squeeze(attention, 2)
         attention = softmax(attention)
-        # repeat hidden and concatenate it with encoder_outputs
-        '''your code'''
-        # calculate energy
-        '''your code'''
-        # get attention, use softmax function which is defined, can change temperature
-        '''your code'''
             
         return attention
     
@@ -115,7 +109,6 @@ class DecoderWithAttention(nn.Module):
         #embedded = [1, batch size, emb dim]
         
         # get weighted sum of encoder_outputs
-        '''your code'''
         w = self.attention(encoder_outputs, hidden)
         weihgt_hidden = torch.ones(encoder_outputs.shape)
         for i in range(encoder_outputs.shape[1]):
@@ -126,13 +119,11 @@ class DecoderWithAttention(nn.Module):
         weihgt_hidden = weihgt_hidden.unsqueeze(0)
 
         # concatenate weighted sum and embedded, break through the GRU
-        '''your code'''
         s_new = torch.cat((embedded, weihgt_hidden), 2)
         output, hidden = self.rnn(s_new, hidden)
         answer = torch.cat((output.squeeze(0), hidden.squeeze(0), weihgt_hidden.squeeze(0)), 1)
 
         # get predictions
-        '''your code'''
         
         #prediction = [batch size, output dim]
         prediction = self.out(answer)
