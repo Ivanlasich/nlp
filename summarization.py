@@ -207,7 +207,6 @@ class BatchIterator():
             tensor_inputs = torch.zeros((self.batch_size, max_sentences, max_sentence_length), dtype=torch.long,
                                         device=self.device)
             # we add index 2 for padding
-            # YOUR CODE
             #tensor_outputs = torch.zeros((self.batch_size, max_sentences), dtype=torch.float32, device=self.device)
             tensor_outputs =  torch.full((self.batch_size, max_sentences), dtype=torch.float32, device=self.device, fill_value = 2)
 
@@ -358,7 +357,6 @@ class SentenceTaggerRNN(nn.Module):
             predictions = content + salience
 
             # 0) initialize summary_representation and novelty by zeros
-            # YOUR CODE
             summary_representation = torch.zeros(outputs.shape[0], outputs.shape[2])
             novelty = torch.zeros(outputs.shape[0], outputs.shape[1])
 
@@ -372,8 +370,6 @@ class SentenceTaggerRNN(nn.Module):
         # 3) add novelty to predictions
         # 4) calculcate probability for current sentence
         # 5) add sentence_num_state with the weight which is equal to probability to summary_representation
-
-        # YOUR CODE
 
         return content + salience - novelty
 
