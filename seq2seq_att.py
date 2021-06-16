@@ -196,7 +196,6 @@ class DecoderWithAttention(nn.Module):
         # embedded = [1, batch size, emb dim]
 
         # get weighted sum of encoder_outputs
-        '''your code'''
         w = self.attention(hidden, encoder_outputs)
         weihgt_hidden = encoder_outputs * w.reshape(w.shape[0], w.shape[1], 1)
 
@@ -205,13 +204,11 @@ class DecoderWithAttention(nn.Module):
         weihgt_hidden = weihgt_hidden.unsqueeze(0)
 
         # concatenate weighted sum and embedded, break through the GRU
-        '''your code'''
         s_new = torch.cat((embedded, weihgt_hidden), 2)
         output, hidden = self.rnn(s_new, hidden)
         answer = torch.cat((output.squeeze(0), hidden.squeeze(0), weihgt_hidden.squeeze(0)), 1)
 
         # get predictions
-        '''your code'''
 
         # prediction = [batch size, output dim]
         prediction = self.out(answer)
